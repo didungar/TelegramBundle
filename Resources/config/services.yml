@@ -1,0 +1,4 @@
+services:
+    didungar_telegram_bot_service:
+        class: DidUngar\TelegramBundle\Service\TelegramBotService
+        arguments: ["@service_container"]

@@ -1,0 +1,19 @@
+{
+    "name": "DidUngar/TelegramBundle",
+    "type": "library",
+    "description": "Bundle for make simply a bot Telegram.",
+    "authors": [
+        {
+            "name": "Didier Ungar",
+            "email": "didungar@gmail.com"
+        }
+    ],
+    "autoload": {
+        "classmap": ["/"]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    }
+}
