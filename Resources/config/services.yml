@@ -2,3 +2,6 @@ services:
     didungar_telegram_bot_service:
         class: DidUngar\TelegramBundle\Service\TelegramBotService
         arguments: ["@service_container"]
+    didungar_telegram_user_service:
+        class: DidUngar\TelegramBundle\Service\TelegramUserService
+        arguments: ["@service_container"]
