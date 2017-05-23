@@ -5,3 +5,7 @@ services:
     didungar_telegram_user_service:
         class: DidUngar\TelegramBundle\Service\TelegramUserService
         arguments: ["@service_container"]
+    didungar_telegram_logs_service:
+        class: DidUngar\TelegramBundle\Service\TelegramLogsService
+        arguments: ["@service_container"]
+
