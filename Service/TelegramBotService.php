@@ -143,6 +143,18 @@ class TelegramBotService {
 	public function getUpdates() {
 		return $this->_get('getUpdates');
 	}
+	public function getChat(array $aArgs = []) {
+		$chat_id = $this->_channel;
+		if (!empty($aArgs['chat_id'])) {
+			$chat_id = $aArgs['chat_id'];
+		}
+		if (empty($chat_id)) {
+			throw new \Exception('chat_id empty');
+		}
+		return $this->_get('getChat', [
+                                        'chat_id' => $chat_id,
+                                ]);
+	}
 	public function test($id_channel) {
 		$this->setChannel($id_channel);
 		var_export($this->talk(date('c')));
