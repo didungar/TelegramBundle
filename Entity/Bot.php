@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Bot
  *
- * @ORM\Table()
+ * @ORM\Table("TelegramBot")
  * @ORM\Entity
  */
 class Bot
