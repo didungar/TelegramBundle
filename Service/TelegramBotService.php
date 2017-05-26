@@ -1,18 +1,22 @@
 <?php
 namespace DidUngar\TelegramBundle\Service;
 
+use DidUngar\TelegramBundle\Entity\Chat;
+
 // doc https://gist.github.com/zqsd/c273411c02d11bae364e
 // doc https://core.telegram.org/methods
 
 class TelegramBotService {
 	protected $container;
 	protected $telegram_bot_token = '';
+	protected $em = null;
 	public function __construct($service_container) {
 		$this->container = $service_container;
 		if ($this->container->hasParameter('didungar_telegram.bot.token'))
 			$this->setTelegramBotToken($this->container->getParameter('didungar_telegram.bot.token'));
 		if ($this->container->hasParameter('didungar_telegram.bot.channel'))
 			$this->setChannel($this->container->getParameter('didungar_telegram.bot.channel'));
+		$this->em = $this->container->get('doctrine')->getEntityManager();
 	}
 	
 	public function getTelegramBotToken() :string {
@@ -151,9 +155,23 @@ class TelegramBotService {
 		if (empty($chat_id)) {
 			throw new \Exception('chat_id empty');
 		}
-		return $this->_get('getChat', [
-                                        'chat_id' => $chat_id,
-                                ]);
+		$aChat = $this->_get('getChat', [
+                	'chat_id' => $chat_id,
+                ]);
+		$oChat = $this->em->getRepository('DidUngarTelegramBundle:Chat')->findOneBy(['uid' => $chat_id,]);
+		if ( empty($oChat) ) {
+			$oChat = new Chat();
+			$oChat->setUid($chat_id);
+			$this->em->persist($oChat);
+		}
+		$oChat->setType($aChat->type);
+		if ( ! empty($aChat->title) )
+			$oChat->setTitle($aChat->title);
+		if ( isset($aChat->all_members_are_administrators) )
+			$oChat->setAllMembersAreAdministrators($aChat->all_members_are_administrators);
+		// TODO : cas des User
+		$this->em->flush();
+		return $oChat;
 	}
 	public function test($id_channel) {
 		$this->setChannel($id_channel);
