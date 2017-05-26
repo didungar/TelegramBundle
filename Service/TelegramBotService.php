@@ -18,6 +18,11 @@ class TelegramBotService {
 			$this->setChannel($this->container->getParameter('didungar_telegram.bot.channel'));
 		$this->em = $this->container->get('doctrine')->getEntityManager();
 	}
+
+	public function loadByName(string $name) {
+		$oBot = $this->em->getRepository('DidUngarTelegramBundle:Bot')->findOneBy(['name' => $name,]);
+		$this->setTelegramBotToken($oBot->getToken());
+	}
 	
 	public function getTelegramBotToken() :string {
 		return $this->telegram_bot_token;
