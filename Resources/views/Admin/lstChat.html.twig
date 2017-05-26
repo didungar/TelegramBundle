@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Liste des Chats TG :</h1>
+<ul>
+    {% for oChat in lstChat %}
+        <li title="id_chat={{oChat.id}}" class="{{ oChat.type }}">
+		<em class="username">{{ oChat.username }} {{ oChat.title }}</em>
+		:
+		{{ oChat.type }}
+	</li>
+    {% endfor %}
+</ul>
+{% endblock %}

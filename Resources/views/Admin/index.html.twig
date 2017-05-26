@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Logs TG :</h1>
+<ul>
+    {% for oLog in lstLog %}
+        <li title="id_log={{oLog.id}}">
+		<em class="username" title="from_id={{oLog.fromId}}">{{ oLog.fromUsername }}</em>
+		:
+		{{ oLog.text }}
+	</li>
+    {% endfor %}
+</ul>
+{% endblock %}
