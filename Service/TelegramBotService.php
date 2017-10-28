@@ -16,7 +16,7 @@ class TelegramBotService {
 			$this->setTelegramBotToken($this->container->getParameter('didungar_telegram.bot.token'));
 		if ($this->container->hasParameter('didungar_telegram.bot.channel'))
 			$this->setChannel($this->container->getParameter('didungar_telegram.bot.channel'));
-		$this->em = $this->container->get('doctrine')->getEntityManager();
+		$this->em = $this->container->get('doctrine')->getManager();
 	}
 
 	public function loadByName(string $name) {
